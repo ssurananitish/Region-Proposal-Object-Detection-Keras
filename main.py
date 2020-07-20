@@ -1,3 +1,5 @@
+# python main.py --image ".\Input_Images\beagle.png" --filter beagle
+
 from tensorflow.keras.applications import ResNet50, imagenet_utils
 from tensorflow.keras.applications.resnet50 import preprocess_input
 from tensorflow.keras.preprocessing.image import img_to_array
