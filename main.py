@@ -7,6 +7,7 @@ from utils import non_max_suppression, get_selective_search
 import numpy as np
 import argparse
 import cv2
+import os
 
 # Command Line Arguments
 ap = argparse.ArgumentParser()
@@ -15,6 +16,7 @@ ap.add_argument("-m","--method", default="fast", type=str, choices=["fast", "qua
 ap.add_argument("-c","--min-conf", type=float, default=0.9, help="Minimum confidence for classification/detection")
 ap.add_argument("-f","--filter", type=str, default=None, help="Comma separated list of ImageNet labels to filter on")
 args = vars(ap.parse_args())
+path, filename = os.path.split(args["image"])
 
 label_filters = args["filter"]
 if label_filters is not None:
@@ -77,6 +79,6 @@ for label in labels.keys():
         cv2.putText(clone, label, (x1, y), cv2.FONT_HERSHEY_SIMPLEX, 0.45, (0, 255, 0), 2)
     
     cv2.imshow("After_NMS", clone)
-    cv2.imwrite("./Output_images/Output.jpg", clone)
+    cv2.imwrite((os.path.join("./Output_images", filename)), clone)
     cv2.waitKey(0)
 
